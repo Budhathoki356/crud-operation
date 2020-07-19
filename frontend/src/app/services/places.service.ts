@@ -13,18 +13,53 @@ export class PlacesService {
   constructor(private http: HttpClient) { }
 
   getPlaces(): Observable<PlaceModel[]> {
-    return this.http.get<PlaceModel[]>(this._url , {
+    return this.http.get<PlaceModel[]>(this._url, {
       headers: new HttpHeaders({
-        'Content-type' : 'application/json'
+        'Content-type': 'application/json'
       })
     })
   }
 
-  postPlaces(place : PlaceModel): Observable<PlaceModel> {
-    return this.http.post<PlaceModel>(this._url + place , {
-      headers: new HttpHeaders({
-        'Content-type' : 'application/json'
-      })
+  upload(data: any, files) {
+    const formData = new FormData();
+    const xhr = new XMLHttpRequest();
+    // append image only if we have files
+    if (files && files[0]) {
+      formData.append('image', files[0], files[0].name);
+    }
+    // data ready for BE
+    for (let key in data) {
+      formData.append(key, data[key]);
+    }
+    let upload = new Observable((observer) => {
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            observer.next(xhr.response);
+          } else {
+            observer.error(xhr.response);
+          }
+        }
+      }
     })
+
+    let URL: string, method: string;
+    if (data._id) {
+      URL = `${this._url}/${data._id}`
+      method = "PUT";
+    } else {
+      URL = `${this._url}`
+      method = "POST";
+    }
+
+
+    xhr.open(method, URL, true);
+
+    xhr.send(formData);
+
+    return upload;
   }
+
+
+
 }
