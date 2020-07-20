@@ -51,7 +51,7 @@
 
     </div>
 
-    <div *ngIf="hasPlaces" class="row">
+    <div *ngIf="!hasPlaces" class="row">
 
       <div class="col-md-4" *ngFor="let place of places">
         <app-place-card [place]="place"></app-place-card>
@@ -59,7 +59,7 @@
 
     </div>
 
-    <div *ngIf="!hasPlaces" class="row">
+    <div *ngIf="hasPlaces" class="row">
       <p>There is no places.</p>
     </div>
 

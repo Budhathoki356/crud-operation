@@ -27,9 +27,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this._placeservice.getPlaces()
       .subscribe(data => {
-        this.hasPlaces = true
+        if (data.length == 0) {
+          this.hasPlaces = true
+        }
         this.places = data
-        console.log(this.places)
       })
   }
 
@@ -38,6 +39,6 @@ export class AppComponent implements OnInit {
       .subscribe(data => {
         console.log(data)
       },
-      err => console.log(err))
+        err => console.log(err))
   }
 }
