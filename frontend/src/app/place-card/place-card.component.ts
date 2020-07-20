@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from "../../environments/environment";
+import { PlacesService } from '../services/places.service';
 
 @Component({
   selector: 'app-place-card',
@@ -12,7 +13,14 @@ export class PlaceCardComponent implements OnInit {
 
   @Input() place: any
 
-  constructor() {  }
+  constructor(private _placeService: PlacesService) {  }
+
+  removePlace(id: any) {
+    this._placeService.remove(id)
+        .subscribe(data=> {
+          console.log(data)
+        })
+  }
 
   ngOnInit(): void {
   }

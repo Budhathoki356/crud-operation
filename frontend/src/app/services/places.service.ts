@@ -43,23 +43,32 @@ export class PlacesService {
       }
     })
 
-    let URL: string, method: string;
-    if (data._id) {
-      URL = `${this._url}/${data._id}`
-      method = "PUT";
-    } else {
-      URL = `${this._url}`
-      method = "POST";
-    }
+    // let URL: string, method: string;
+    // if (data._id) {
+    //   URL = `${this._url}/${data._id}`
+    //   method = "PUT";
+    // } else {
+    //   URL = `${this._url}`
+    //   method = "POST";
+    // }
 
 
-    xhr.open(method, URL, true);
+    xhr.open('post', this._url, true);
 
     xhr.send(formData);
 
     return upload;
   }
 
+  // delete
+
+  remove(id: any) {
+    return this.http.delete(this._url +'/' + id, {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    })
+  }
 
 
 }

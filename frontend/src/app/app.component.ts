@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   constructor(private _placeservice: PlacesService) { }
 
   onFileSelected(event) {
-    // this.selectedFile = <File>event.target.files[0]
     this.selectedFile = event.target.files
   }
 
@@ -35,12 +34,7 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    // const fd = new FormData()
-    // fd.append('image',this.selectedFile ,this.selectedFile.name)
-    // for(let key in this.registerForm.value) {
-    //   fd.append(key, this.registerForm.value[key])
-    // }
-    this._placeservice.upload(this.registerForm, this.selectedFile)
+    this._placeservice.upload(this.registerForm.value, this.selectedFile)
       .subscribe(data => {
         console.log(data)
       },

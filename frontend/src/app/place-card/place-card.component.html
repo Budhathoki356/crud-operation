@@ -1,12 +1,11 @@
 <div class="card mb-4 shadow-sm">
-    <img class="bd-placeholder-img card-img-top" src="{{imgUrl}}/{{place.image}}"  alt="{{place.image}}">
+    <img class="bd-placeholder-img card-img-top" src="{{imgUrl}}/{{place.image}}" alt="{{place.image}}">
     <div class="card-body">
         <h3 class="card-title">{{place.name}}</h3>
         <p class="card-text">{{place.description}}</p>
         <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fa fa-eye"></i> View</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                <button type="button" class="btn btn-md btn-danger" (click)="removePlace(place._id)" ><i class="fa fa-trash-o"></i></button>
             </div>
             <small class="text-muted">{{place.createdAt | date: 'mediumDate'}}</small>
         </div>
